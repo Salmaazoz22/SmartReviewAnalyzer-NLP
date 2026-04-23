@@ -1,0 +1,4 @@
+Model,Traning Time
+Logistic Regression,0.1 Minutes
+LSTM,0.65 Minutes
+BERT,10 Minutes

@@ -1,0 +1,10 @@
+Positive Keywords:
+great
+love
+best
+
+
+Negative Keywords:
+bad
+movie 
+worst

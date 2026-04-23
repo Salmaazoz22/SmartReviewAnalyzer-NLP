@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1-score
+Logistic Regression,0.88,0.88,0.88,0.88
+LSTM,0.8541,0.877,0.825,0.8502
+BERT,0.8937,0.8897,0.8997,0.8947

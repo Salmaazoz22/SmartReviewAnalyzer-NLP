@@ -1,0 +1,4 @@
+Most Negative Reviews contains "bad","movie" and "worst".
+Most Positive Reviews contains "great","love" and "best".
+The Dataset contains approximately 50% positive and 50% negative reviews.
+Bert Achieved The Highest Accuracy Among All Models,Making it The Best-performing Model.
