@@ -240,7 +240,7 @@ This project was built collaboratively as part of an NLP course. Each team membe
 | **Malak Tarek** | *Data Engineer* | Data sourcing, dataset curation & initial cleaning |
 | **Sameh Naeem** | *NLP Engineer* | Advanced text preprocessing, normalization pipeline |
 | **Mohammed Saied** | *ML Engineer* | Baseline model development (Logistic Regression) |
-| **Rawan Essam** | *Deep Learning Engineer* | LSTM and BERT architecture design & implementation |
+| **Rawan Essam** | *Deep Learning Engineer* | LSTM and BERT architecture design and implementation |
 | **Ahmed Khaled** | *Analyst* | visualization suite & metric analysis |
 
 </div>
