@@ -1,13 +1,14 @@
 <div align="center">
 
-# 🧠 Smart Review Analyzer
+# 🎬 SmartReviewAnalyzer-NLP
 
-### A Complete NLP Sentiment Analysis Pipeline
+### An End-to-End NLP Sentiment Analysis Pipeline
 
-*Classifying user reviews into Positive / Negative with deep visual insights*
+*Classifying movie reviews as Positive or Negative — from raw text to fine-tuned Transformers*
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![NLTK](https://img.shields.io/badge/NLTK-NLP-154f3c?style=for-the-badge&logo=python&logoColor=white)](https://www.nltk.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
 [![Transformers](https://img.shields.io/badge/🤗%20Transformers-BERT-FFD21E?style=for-the-badge)](https://huggingface.co/transformers/)
 
@@ -21,142 +22,196 @@
 ## 📌 Table of Contents
 
 - [Overview](#-overview)
-- [Pipeline Architecture](#-pipeline-architecture)
-- [Results](#-results)
-- [Visual Insights](#-visual-insights)
-- [Repository Structure](#-repository-structure)
-- [Installation](#-installation)
+- [Problem Statement](#-problem-statement)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [NLP & ML Pipeline](#-nlp--ml-pipeline)
+- [System Architecture](#-system-architecture)
+- [Installation & Setup](#-installation--setup)
 - [How to Run](#-how-to-run)
+- [Results](#-results)
+- [Screenshots & Visualizations](#-screenshots--visualizations)
+- [Future Improvements](#-future-improvements)
 - [Team & Contributions](#-team--contributions)
+- [License](#-license)
 
 ---
 
 ## 🔍 Overview
 
-**Smart Review Analyzer** is an end-to-end Natural Language Processing pipeline that classifies user-generated reviews as **Positive** or **Negative**. The project progresses through three tiers of modeling complexity — from a classical Baseline to a State-of-the-Art Transformer — providing a thorough benchmarking study alongside rich visual analytics.
+**SmartReviewAnalyzer-NLP** is a complete, end-to-end Natural Language Processing project that classifies movie reviews from the **IMDB Dataset** (50,000 reviews) as **Positive** or **Negative**. The project follows a structured, notebook-driven pipeline that progresses from raw text cleaning through classical machine learning to state-of-the-art transformer fine-tuning — providing a rigorous benchmarking study at each stage.
 
-> **Champion Model: BERT** — achieving **89.37% accuracy** and an **F1-Score of 0.8947**
+> 🏆 **Champion Model: BERT** — **89.37% accuracy** | **F1-Score: 0.8947**
 
 **Key highlights:**
-- 🔡 Robust multi-stage text preprocessing
-- 📐 Dual feature extraction strategies (TF-IDF & Word2Vec)
-- 🏆 Three-tier modeling: Logistic Regression → LSTM → BERT
-- 📊 Comprehensive visualizations including Word Clouds, Distribution Charts, and Confusion Matrices
+- 🔡 Multi-stage text preprocessing with NLTK
+- 📐 Dual feature extraction: TF-IDF and Word2Vec embeddings
+- 🏅 Three-tier modeling: Logistic Regression → LSTM → BERT
+- 📊 Rich visualizations: word clouds, confusion matrices, training curves, model comparison
 
 ---
 
-## ⚙️ Pipeline Architecture
+## 🚩 Problem Statement
 
-### 1 · Text Preprocessing
-
-Raw review text is normalized through a standardized cleaning pipeline before any modeling takes place:
-
-| Step | Description |
-|------|-------------|
-| **Lowercasing** | Uniform case normalization across all tokens |
-| **Punctuation Removal** | Strip non-alphabetic characters and special symbols |
-| **Stopword Removal** | Eliminate high-frequency, low-information words via NLTK |
-| **Tokenization** | Split sentences into discrete word tokens |
-| **Lemmatization** | Reduce tokens to their canonical dictionary form |
+User-generated reviews contain valuable insights, but their volume and unstructured nature make manual analysis impractical at scale. Automated sentiment analysis enables businesses and researchers to extract actionable intelligence from thousands of reviews efficiently. This project builds and rigorously compares multiple approaches — from interpretable classical ML to deep bidirectional transformers — to accurately determine the sentiment polarity of any given review.
 
 ---
 
-### 2 · Feature Extraction
+## ✨ Features
 
-Two complementary representation strategies are implemented:
-
-- **TF-IDF** — Captures term importance relative to the corpus, used as input for the Baseline model.
-- **Word2Vec** — Dense semantic embeddings that encode contextual word relationships, feeding into deep learning models.
+- ✅ Complete data cleaning pipeline (HTML removal, lowercasing, punctuation stripping, deduplication)
+- ✅ Advanced text preprocessing (tokenization, stopword removal, lemmatization, normalization)
+- ✅ TF-IDF vectorization (5,000 features, sparse matrix: 49,582 × 5,000)
+- ✅ Word2Vec embeddings (100-dim, vocabulary: 64,530 tokens, L2-normalized sentence vectors)
+- ✅ Baseline model: Logistic Regression — **88.00% accuracy**
+- ✅ Deep learning model: Bidirectional LSTM (Keras/TensorFlow) — **85.41% accuracy**
+- ✅ Transformer model: BERT fine-tuned (`bert-base-uncased`) — **89.37% accuracy**
+- ✅ Comprehensive evaluation suite with confusion matrices and per-class metrics
+- ✅ Modular, reproducible notebooks — one notebook per pipeline stage
+- ✅ Saved model artifacts (`.pkl`, `.h5`) for downstream inference
 
 ---
 
-### 3 · Modeling Approach
+## 🛠️ Tech Stack
 
-A three-tier progression from classical ML to cutting-edge NLP:
+| Layer | Tools & Libraries |
+|---|---|
+| **Language** | Python 3.8+ |
+| **Data Handling** | pandas, numpy |
+| **NLP / Text Processing** | NLTK (punkt, stopwords, wordnet, WordNetLemmatizer), re |
+| **Feature Extraction** | scikit-learn (TfidfVectorizer), Gensim (Word2Vec) |
+| **Baseline ML** | scikit-learn (LogisticRegression, train_test_split, metrics) |
+| **Deep Learning** | TensorFlow / Keras (LSTM) |
+| **Transformers** | Hugging Face Transformers (BERT `bert-base-uncased`) |
+| **Visualization** | matplotlib, seaborn, WordCloud |
+| **Serialization** | pickle |
+| **Environment** | Jupyter Notebook / Google Colab |
+
+---
+
+## 🧠 NLP & ML Pipeline
+
+The project is organized as a sequential, 6-stage notebook pipeline:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Tier 1 — Baseline    │  Logistic Regression + TF-IDF   │
-│  Tier 2 — Intermediate│  LSTM + Word2Vec Embeddings      │
-│  Tier 3 — SOTA 🏆     │  BERT (bert-base-uncased)        │
-└─────────────────────────────────────────────────────────┘
+Raw IMDB Reviews (50,000 samples)
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 1 · Data Cleaning         │  01_data_cleaning.ipynb
+│  ─ Lowercase & strip HTML tags   │
+│  ─ Remove punctuation & numbers  │
+│  ─ NLTK tokenization             │
+│  ─ Stopword removal              │
+│  ─ WordNet lemmatization         │
+│  ─ Drop nulls & duplicates       │
+│  → Output: cleaned_reviews.csv   │
+└──────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 2 · Text Preprocessing    │  02_Text_Preprocessing.ipynb
+│  ─ Re-tokenize cleaned text      │
+│  ─ Normalize (keep alpha only)   │
+│  ─ Filter short words (< 3 ch.)  │
+│  ─ Custom extended stopwords     │
+│  ─ Verb-form lemmatization       │
+│  ─ Reconstruct processed_text    │
+│  → Output: processed_text.csv    │
+└──────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 3 · Feature Extraction    │  03_feature_extraction_tfidf_word2vec.ipynb
+│  ─ TF-IDF: max_features=5,000    │
+│    matrix shape: (49,582 × 5,000)│
+│  ─ Word2Vec: vector_size=100,    │
+│    window=5, min_count=2         │
+│    vocab: 64,530 tokens          │
+│    sentence embeddings: L2-norm  │
+│  → tfidf_vectors.pkl             │
+│  → word2vec_vectors.pkl          │
+└──────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 4 · Baseline Model        │  04_Baseline_Model.ipynb
+│  ─ Logistic Regression (TF-IDF)  │
+│  ─ 80 / 20 stratified split      │
+│  ─ Accuracy:  88.00%             │
+│  ─ F1-Score:  0.8800             │
+│  → Output: baseline_model.pkl    │
+└──────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 5 · Advanced Models       │  05_Advanced_Model.ipynb
+│  ─ LSTM (Keras / TensorFlow)     │
+│    Accuracy: 85.41%  F1: 0.8502  │
+│  ─ BERT fine-tuning              │
+│    (bert-base-uncased)           │
+│    Accuracy: 89.37%  F1: 0.8947  │
+│  → advanced_model.h5             │
+│  → lstm_training_history.pkl     │
+│  → bert_training_history.pkl     │
+└──────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────┐
+│  Stage 6 · Evaluation            │  06_Evaluation.ipynb
+│  ─ Full metrics comparison       │
+│  ─ Confusion matrices            │
+│  ─ Training curves               │
+│  ─ Side-by-side model comparison │
+└──────────────────────────────────┘
 ```
 
 ---
 
-## 📊 Results
-
-> The table below summarizes performance metrics evaluated on the held-out test set. **BERT is our champion model.**
-
-<div align="center">
-
-| Model | Accuracy | Precision | Recall | F1-Score |
-|:------|:--------:|:---------:|:------:|:--------:|
-| Logistic Regression | 0.8800 | 0.88 | 0.88 | 0.8800 |
-| LSTM | 0.8541 | 0.877 | 0.825 | 0.8502 |
-| **BERT** 🏆 | **0.8937** | **0.8897** | **0.8997** | **0.8947** |
-
-</div>
-
-**Key Takeaways:**
-
-- ✅ **BERT** outperforms all models across every metric, leveraging deep bidirectional context understanding.
-- 📉 **LSTM** performs competitively on precision but sacrifices recall, indicating difficulty capturing edge-case negative patterns.
-- ⚡ **Logistic Regression** delivers surprisingly strong and balanced results as a fast, interpretable baseline.
-
----
-
-## 🎨 Visual Insights
-
-The pipeline generates the following diagnostic visualizations automatically:
-
-| Visualization | Purpose |
-|---------------|---------|
-| ☁️ **Word Clouds** | Surface the most frequent and influential tokens per sentiment class |
-| 📊 **Bar Charts** | Examine class distribution and label balance across the dataset |
-| 🟦 **Confusion Matrices** | Per-model breakdown of True/False Positives and Negatives |
-
-All plots are saved to the `outputs/visualizations/` directory upon pipeline execution.
-
----
-
-## 🗂️ Repository Structure
+## 🏗️ System Architecture
 
 ```
 SmartReviewAnalyzer-NLP/
 │
-├── 📁 data/
-│   ├── raw/                    # Original, unprocessed review datasets
-│   └── processed/              # Cleaned and tokenized data ready for modeling
-│
 ├── 📁 notebooks/
-│   ├── 01_EDA.ipynb            # Exploratory Data Analysis & class distribution
-│   ├── 02_preprocessing.ipynb  # Full preprocessing pipeline walkthrough
-│   ├── 03_feature_extraction.ipynb  # TF-IDF & Word2Vec feature generation
-│   ├── 04_baseline_model.ipynb # Logistic Regression training & evaluation
-│   ├── 05_lstm_model.ipynb     # LSTM architecture, training & evaluation
-│   └── 06_bert_model.ipynb     # BERT fine-tuning, evaluation & analysis
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_Text _Preprocessing.ipynb
+│   ├── 03_feature_extraction_tfidf_word2vec.ipynb
+│   ├── 04_Baseline_Model.ipynb
+│   ├── 05_Advanced_Model.ipynb
+│   └── 06_Evaluation.ipynb
 │
-├── 📁 src/
-│   ├── preprocessing.py        # Text cleaning and normalization functions
-│   ├── feature_extraction.py   # TF-IDF and Word2Vec pipelines
-│   ├── models/
-│   │   ├── baseline.py         # Logistic Regression model
-│   │   ├── lstm.py             # LSTM model definition and training loop
-│   │   └── bert.py             # BERT fine-tuning wrapper
-│   └── visualizations.py       # Word Cloud, bar chart, confusion matrix utils
+├── 📁 models/
+│   ├── baseline_model.pkl            # Logistic Regression
+│   ├── advanced_model.h5             # LSTM (Keras)
+│   ├── lstm_training_history.pkl
+│   └── bert_training_history.pkl
+│
+├── 📁 data/
+│   └── sample_features.csv
 │
 ├── 📁 outputs/
-│   ├── models/                 # Saved model weights and checkpoints
-│   └── visualizations/         # Generated plots and figures
+│   ├── Insights/
+│   └── Tables/
 │
-├── requirements.txt
+├── 📁 Plots & Visualization/
+│   ├── sentiment_distribution.png
+│   ├── wordcloud_positive.png
+│   ├── wordcloud_negative.png
+│   ├── The Confusion Matrix for The baseline Model.png
+│   ├── lstm_confusion_matrix.png
+│   ├── lstm_training_curves.png
+│   ├── bert_confusion_matrix.png
+│   ├── bert_training_curves.png
+│   └── model_comparison.png
+│
+├── Smart Review Analyzer - NLP Presentation.pdf
 └── README.md
 ```
 
 ---
 
-## 🛠️ Installation
+## ⚙️ Installation & Setup
 
 **Prerequisites:** Python 3.8 or higher.
 
@@ -180,68 +235,122 @@ source venv/bin/activate
 **3. Install all dependencies**
 
 ```bash
-pip install -r requirements.txt
+pip install pandas numpy nltk scikit-learn gensim tensorflow keras \
+            transformers matplotlib seaborn wordcloud
 ```
 
 **4. Download required NLTK resources**
 
 ```python
 import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
-nltk.download('punkt')
 ```
+
+**5. Download the dataset**
+
+Download the [IMDB Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews) (`IMDB Dataset.csv`) and place it in the project root directory.
 
 ---
 
 ## 🚀 How to Run
 
-### Option A — Run via Jupyter Notebooks *(Recommended)*
+Run the notebooks **in order** for the full pipeline:
 
-Execute the notebooks in order for a step-by-step walkthrough:
+| Step | Notebook | Input | Output |
+|:----:|----------|-------|--------|
+| 1 | `01_data_cleaning.ipynb` | `IMDB Dataset.csv` | `cleaned_reviews.csv` |
+| 2 | `02_Text _Preprocessing.ipynb` | `cleaned_reviews.csv` | `processed_text.csv` |
+| 3 | `03_feature_extraction_tfidf_word2vec.ipynb` | `processed_text.csv` | `tfidf_vectors.pkl`, `word2vec_vectors.pkl` |
+| 4 | `04_Baseline_Model.ipynb` | `tfidf_vectors.pkl` | `baseline_model.pkl` |
+| 5 | `05_Advanced_Model.ipynb` | `processed_text.csv` | `advanced_model.h5`, training histories |
+| 6 | `06_Evaluation.ipynb` | All models & data | Charts, metrics, comparison tables |
+
+**Launch Jupyter:**
 
 ```bash
 jupyter notebook notebooks/
 ```
 
-Open and run notebooks `01` through `06` sequentially.
+> 💡 All notebooks were developed and tested on **Google Colab**. You can open them directly in Colab by uploading the notebook files and mounting your Drive for data access.
 
-### Option B — Run the full pipeline via script
+---
 
-```bash
-# Step 1: Preprocess raw data
-python src/preprocessing.py --input data/raw/ --output data/processed/
+## 📊 Results
 
-# Step 2: Generate features
-python src/feature_extraction.py --input data/processed/
+> Performance evaluated on a held-out test set (20% stratified split). **BERT is the champion model.**
 
-# Step 3: Train and evaluate all models
-python src/models/baseline.py
-python src/models/lstm.py
-python src/models/bert.py
+<div align="center">
 
-# Step 4: Generate all visualizations
-python src/visualizations.py
-```
+| Model | Accuracy | Precision | Recall | F1-Score |
+|:------|:--------:|:---------:|:------:|:--------:|
+| Logistic Regression (TF-IDF) | 0.8800 | 0.88 | 0.88 | 0.8800 |
+| LSTM | 0.8541 | 0.877 | 0.825 | 0.8502 |
+| **BERT** 🏆 | **0.8937** | **0.8897** | **0.8997** | **0.8947** |
 
-All results, metrics, and plots will be saved under `outputs/`.
+</div>
+
+**Key Takeaways:**
+
+- 🏆 **BERT** outperforms all models across every metric by leveraging deep bidirectional contextual understanding of the review text.
+- ⚡ **Logistic Regression** delivers surprisingly strong, balanced results as a fast and interpretable baseline — a testament to the power of well-tuned TF-IDF features.
+- 📉 **LSTM** performs competitively on precision but shows lower recall, suggesting difficulty generalizing edge-case negative patterns without full contextual attention.
+
+---
+
+## 🎨 Screenshots & Visualizations
+
+### Sentiment Distribution
+![Sentiment Distribution](Plots%20%26%20Visualization/sentiment_distribution.png)
+
+### Word Clouds
+| Positive Reviews | Negative Reviews |
+|:-:|:-:|
+| ![Positive WordCloud](Plots%20%26%20Visualization/wordcloud_positive.png) | ![Negative WordCloud](Plots%20%26%20Visualization/wordcloud_negative.png) |
+
+### Confusion Matrices
+| Logistic Regression | LSTM | BERT |
+|:-:|:-:|:-:|
+| ![Baseline CM](Plots%20%26%20Visualization/The%20Confusion%20Matrix%20for%20The%20baseline%20Model.png) | ![LSTM CM](Plots%20%26%20Visualization/lstm_confusion_matrix.png) | ![BERT CM](Plots%20%26%20Visualization/bert_confusion_matrix.png) |
+
+### Training Curves
+| LSTM | BERT |
+|:-:|:-:|
+| ![LSTM Curves](Plots%20%26%20Visualization/lstm_training_curves.png) | ![BERT Curves](Plots%20%26%20Visualization/bert_training_curves.png) |
+
+### Model Comparison
+![Model Comparison](Plots%20%26%20Visualization/model_comparison.png)
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] Deploy as a web application (FastAPI backend + Streamlit UI)
+- [ ] Extend to multi-class sentiment (e.g., 1–5 star ratings)
+- [ ] Add aspect-based sentiment analysis (ABSA)
+- [ ] Experiment with RoBERTa and DistilBERT for improved efficiency
+- [ ] Support for multilingual reviews using multilingual BERT
+- [ ] Add model explainability using LIME or SHAP
+- [ ] Build a real-time review analysis REST API
 
 ---
 
 ## 👥 Team & Contributions
 
-This project was built collaboratively as part of an NLP course. Each team member owned a critical segment of the pipeline:
+This project was built collaboratively as part of an NLP course at the **Faculty of Computers and Information, Helwan University**.
 
 <div align="center">
 
 | Member | Role | Contributions |
 |:-------|:----:|:-------------|
-| 👑 **Salma** | *Team Lead* | Project management, roadmap planning, TF-IDF & Word2Vec feature extraction |
-| **Malak Tarek** | *Data Engineer* | Data sourcing, dataset curation & initial cleaning |
-| **Sameh Naeem** | *NLP Engineer* | Advanced text preprocessing, normalization pipeline |
+| 👑 **Salma Mohamed** | *Team Lead* | Project management, TF-IDF & Word2Vec feature extraction, README |
+| **Malak Tarek** | *Data Engineer* | Dataset sourcing, curation & initial cleaning |
+| **Sameh Naeem** | *NLP Engineer* | Advanced text preprocessing & normalization pipeline |
 | **Mohammed Saied** | *ML Engineer* | Baseline model development (Logistic Regression) |
-| **Rawan Essam** | *Deep Learning Engineer* | LSTM and BERT architecture design and implementation |
-| **Ahmed Khaled** | *Analyst* | visualization suite & metric analysis |
+| **Rawan Essam** | *Deep Learning Engineer* | LSTM and BERT architecture, training & evaluation |
+| **Ahmed Khaled** | *Analyst* | Visualization suite & metric analysis |
 
 </div>
 
@@ -258,5 +367,7 @@ This project is intended for academic and educational purposes.
 **Built with ❤️ by the Smart Review Analyzer Team**
 
 *If you found this project helpful, please consider giving it a ⭐ on [GitHub](https://github.com/Salmaazoz22/SmartReviewAnalyzer-NLP)*
+
+> 📎 See `Smart Review Analyzer - NLP Presentation.pdf` for the full project presentation.
 
 </div>
